@@ -24,7 +24,7 @@ Users should be able to:
 - **Bonus**: When a number changes, make the card flip from the middle
 
 ### Links
-- Live Site URL: 
+- Live Site URL: https://countdown-timer-frans.vercel.app/
 
 ## My process
 
