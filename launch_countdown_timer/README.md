@@ -1,6 +1,5 @@
 # Launch countdown timer solution
-
-![Preview]("./images/preview-image.png")
+<img width="1419" alt="preview" src="https://github.com/FransDressler/my_programming_exercises/assets/111640197/1170f102-1c75-4044-b8ca-8b7841614185">
 
 This is a solution to the [Launch countdown timer challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/launch-countdown-timer-N0XkGfyz-). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
