@@ -1,4 +1,5 @@
 # Launch countdown timer solution
+<img width="1419" alt="preview" src="https://github.com/FransDressler/my_programming_exercises/assets/111640197/1170f102-1c75-4044-b8ca-8b7841614185">
 
 This is a solution to the [Launch countdown timer challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/launch-countdown-timer-N0XkGfyz-). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
@@ -23,7 +24,7 @@ Users should be able to:
 - **Bonus**: When a number changes, make the card flip from the middle
 
 ### Links
-- Live Site URL: 
+- Live Site URL: https://countdown-timer-frans.vercel.app/
 
 ## My process
 
