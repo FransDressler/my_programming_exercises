@@ -1,0 +1,299 @@
+// variables
+
+$breakpoint-desktop: 1440px;
+
+$bright-blue: hsl(220, 98%, 61%);
+$check-gradient: linear-gradient(45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+
+$light-clr-extra: hsl(0, 0%, 98%);
+$light-bright-clr: hsl(236, 33%, 92%);
+$light-light-clr: hsl(233, 11%, 84%);
+$light-med-clr: hsl(236, 9%, 61%);
+$light-dark-clr: hsl(235, 19%, 35%);
+
+$dark-dark-clr-1: hsl(235, 21%, 11%);
+$dark-dark-clr-2: hsl(235, 24%, 19%);
+$dark-light-clr-1: hsl(234, 39%, 85%);
+$dark-bright-clr: hsl(236, 33%, 92%);
+$dark-light-clr-2: hsl(234, 11%, 52%);
+$dark-med-clr-1: hsl(233, 14%, 35%);
+$dark-med-clr-2: hsl(237, 14%, 26%);
+
+//  utility classes
+
+button,
+input {
+    background-color: transparent;
+    border: None;
+}   
+
+.flex {
+    display: flex;
+    gap: 2em
+}
+
+.container {
+    width: min(100%, 600px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+
+    .top-container {
+        justify-content: space-between;
+        width: 80%;
+        padding: 1rem .5em;
+
+        button {
+            color: $light-clr-extra
+        }
+    }
+
+    .check-btn {
+        width: 2rem;
+        aspect-ratio: 1;
+        border: 1px solid $light-bright-clr;
+        font-size: 20px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        color: $light-clr-extra;
+    }
+
+    .bg-gradient {
+        background: $check-gradient;
+    }
+}
+
+.page {
+    min-width: 100vw;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+
+    @media (min-width: 400px) {
+        font-size: 18px;
+    }
+
+    form{ 
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: right;
+
+        input {
+            height: 50px;
+            width: 99%;
+            padding: 0 1rem;
+            border-radius: 8px;
+        }
+        
+        button {
+            margin-left: -1.5rem;
+            color: $light-med-clr;
+        }   
+
+}
+
+    .delete-icon {
+        font-size: 15px;
+        color: $light-med-clr;
+    }
+
+    .select-toggles {
+        font-family: 'Josefin Sans' ;
+        .active-filter {
+            color: $bright-blue;
+        }
+        *{
+        font-size: 1em;
+    }
+
+}
+
+
+    .position-bottom {
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+        // position: relative;
+        margin-top: 1em;
+        // bottom: 3em;
+    }
+}
+
+
+ul {
+    list-style:None;
+    width: 80%;
+
+
+    .todo-completed {
+        text-decoration: line-through;
+    }
+
+    
+
+    li {
+        margin-left: -1rem;
+        width: 90%;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: space-around;
+        line-height: 23px;
+        padding: .3em .9em;
+        border-bottom: 1px solid $light-light-clr;
+
+        &:first-child {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        &:last-child {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border-bottom: None;
+        }
+
+        p {
+            min-width: 70%;
+        }
+
+    }
+
+   
+
+}
+.position-bottom {
+    width: inherit;
+    display: grid;
+    place-items: center;
+}
+
+.container-below {
+    width: 70%;
+}
+
+.dark-mode {
+    color: $dark-light-clr-1;
+    background-color: $dark-dark-clr-1;
+
+    input {
+        color: $dark-light-clr-1;
+    }
+
+
+    button {
+        color: $dark-light-clr-2
+    }
+
+    input,
+    li {
+        background-color: $dark-med-clr-1;
+    }
+
+    li {border-bottom: 1px solid $dark-light-clr-2;
+
+    &:last-child {
+        border-bottom: None;
+    }}
+
+    * {
+        z-index: 2;
+    }
+
+    .background-dark {
+        position: absolute;
+        top: 0;
+        min-width: 100vw;
+        min-height: 30vh;
+        background-image: url('../assets/bg-mobile-dark.jpg');
+        background-position: center;
+        background-size: cover;
+        z-index: 1;
+
+        @media (min-width: $breakpoint-desktop) {
+            background-image: url('../assets/bg-desktop-dark.jpg');
+            aspect-ratio: 5;
+        }
+    }
+
+    h1 {
+        color: $light-clr-extra;
+        letter-spacing: 6px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .container-below {
+        background-color: $dark-med-clr-1;
+        border-radius: 8px;
+        padding: .5rem 2rem;
+        justify-content: space-between;
+
+        p {
+            color:  $dark-light-clr-2;
+        }
+    }
+}
+
+.light-mode {
+    color: $light-dark-clr;
+    background-color: $light-bright-clr;
+
+    * {
+        z-index: 2;
+    }
+    input {
+        color:  $light-dark-clr;
+    }
+
+    button {
+        color: $light-dark-clr;
+    }
+
+    input,
+    li {
+        background-color: $light-clr-extra;
+    }
+
+    li {border-bottom: 1px solid $light-light-clr;
+
+    &:last-child {
+        border-bottom: None;
+    }}
+
+
+    .background-light {
+        position: absolute;
+        top: 0;
+        min-width: 100vw;
+        min-height: 30vh;
+        background-image: url('../assets/bg-mobile-light.jpg');
+        background-position: center;
+        background-size: cover;
+        z-index: 1;
+
+        @media (min-width: $breakpoint-desktop) {
+            background-image: url('../assets/bg-desktop-light.jpg');
+            aspect-ratio: 5;
+        }
+    }
+
+    h1 {
+        color: $light-clr-extra;
+        letter-spacing: 6px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .container-below {
+        background-color: $light-clr-extra;
+        border-radius: 8px;
+        padding: .5rem 2rem;
+        justify-content: space-between;
+    }
+}
