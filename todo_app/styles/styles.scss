@@ -102,15 +102,6 @@ input {
         color: $light-med-clr;
     }
 
-    .select-toggles {
-        font-family: 'Josefin Sans' ;
-        .active-filter {
-            color: $bright-blue;
-        }
-        *{
-        font-size: 1em;
-    }
-
 }
 
 
@@ -122,7 +113,7 @@ input {
         margin-top: 1em;
         // bottom: 3em;
     }
-}
+
 
 
 ul {
@@ -144,7 +135,7 @@ ul {
         gap: 1rem;
         justify-content: space-around;
         line-height: 23px;
-        padding: .3em .9em;
+        padding: .3em 1.2em;
         border-bottom: 1px solid $light-light-clr;
 
         &:first-child {
@@ -159,7 +150,11 @@ ul {
         }
 
         p {
-            min-width: 70%;
+            min-width: 50%;
+
+            @media (min-width: 300px) {
+                min-width: 70%;
+            }
         }
 
     }
@@ -237,6 +232,10 @@ ul {
         p {
             color:  $dark-light-clr-2;
         }
+
+        .active-filter p{
+            color: $bright-blue;
+        }
     }
 }
 
@@ -297,3 +296,12 @@ ul {
         justify-content: space-between;
     }
 }
+
+.select-toggles {
+        font-family: 'Josefin Sans' ;
+        .active-filter {
+            color: $bright-blue;
+        }
+        *{
+        font-size: 1em;
+    }}
