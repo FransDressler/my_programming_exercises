@@ -1,5 +1,5 @@
 # Todo-App Solution
-<img width="1427" alt="todo-preview" src="https://github.com/FransDressler/my_programming_exercises/assets/111640197/66c3a976-2474-4791-975b-7863a1174ac7">
+<img width="1430" alt="todo-preview" src="https://github.com/FransDressler/my_programming_exercises/assets/111640197/6dc236ad-c860-407f-a434-62fffb04af0b">
 
 
 This is a solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
