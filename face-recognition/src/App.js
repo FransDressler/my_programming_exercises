@@ -1,5 +1,5 @@
 import React, { Component } from'react';
-import Clarifai from 'clarifai';
+
 
 import './App.css';
 import Navigation from './components/Navigation/Navigation';
@@ -15,58 +15,40 @@ import Register from './components/Register/Register';
 //   apiKey: '296073963aa148aeae830e620e24afb9',
 // });
 
-const returnClarifaiRequestOptions = (imageUrl) => {
-  // Your PAT (Personal Access Token) can be found in the portal under Authentification
-const PAT = 'aaf181c3de1849b79571d6377b721216';
-// Specify the correct user_id/app_id pairings
-// Since you're making inferences outside your app's scope
-const USER_ID = 'frans070304';       
-const APP_ID = 'face-recognition';
-// Change these to whatever model and image URL you want to use
-// const MODEL_VERSION_ID = '';
-const IMAGE_URL = imageUrl;
 
-const raw = JSON.stringify({
-  "user_app_id": {
-      "user_id": USER_ID,
-      "app_id": APP_ID
-  },
-  "inputs": [
-      {
-          "data": {
-              "image": {
-                  "url": IMAGE_URL
-              }
-          }
-      }
-  ]
-});
-const requestOptions = {
-  method: 'POST',
-  headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Key ' + PAT
-  },
-  body: raw
-};
-
-return requestOptions;
-};
 
 // NOTE: MODEL_VERSION_ID is optional, you can also call prediction with the MODEL_ID only
 // https://api.clarifai.com/v2/models/{YOUR_MODEL_ID}/outputs
 // this will default to the latest version_id
+const initialState = {
+  input: '',
+  imageUrl: '',
+  box: {},
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: 'Hallo',
+    email: '',
+    entries: 0,
+    joinded: '',
+  },
+};
 
 class App extends Component{
   constructor(props) {
     super(props);
-    this.state = {
-      input: '',
-      imageUrl: '',
-      box: {},
-      route: 'signin',
-      isSignedIn: false
-    };
+    this.state = initialState
+  }
+
+  loadUser = data  => {
+    this.setState({user: {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      entries: data.entries,
+      joinded: data.joined
+    }})
   }
 
   calculateFaceLocation = (data) => {
@@ -91,22 +73,47 @@ class App extends Component{
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-
-    fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", returnClarifaiRequestOptions(this.state.input))
-    .then(response => response.text())
-    .then(output => {this.displayFaceBox(
+    fetch('http://localhost:3000/imageurl', {
+          method: 'post',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            input: this.state.input
+          })
+        })
+        .then(response => response.json())
+    .then(output => {
+      if (output) {
+        fetch('http://localhost:3000/image', {
+          method: 'put',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            id: this.state.user.id
+          })
+        })
+        .then(response => response.json())
+        .then(count => {
+          this.setState(Object.assign(this.state.user, { entries: count.entries }), () => {
+          });
+        })
+        .catch(console.log);
+        // .then(count => {
+        //   this.setState(Object.assign(this.state.user, { entries: count}))
+        // })
+      };
+      this.displayFaceBox(
                     this.calculateFaceLocation(JSON.parse(output))
-                    )})
+                    )
+    })
     .catch(error => console.log('error', error));
 
-    // ! console logging position for box
+    // * console logging position for box
     // console.log(JSON.parse(output).outputs[0].data.regions[0].region_info.bounding_box)
   };
 
   onRouteChange = (value) => {
 
     if (value === 'signin'|| value === 'register') {
-      this.setState({ isSignedIn: false });
+      this.setState({ initialState });
     } else if (value === 'home') {
       this.setState({ isSignedIn: true });
     }
@@ -123,7 +130,9 @@ class App extends Component{
       {this.state.route === 'home' 
       ? <div>
           <Logo/>
-          <Rank/>
+          <Rank 
+            name={this.state.user.name}
+            entries={this.state.user.entries}/>
           <ImageLinkForm
             onInputChange={this.onInputChange}
             onButtonSubmit={this.onButtonSubmit}
@@ -131,7 +140,7 @@ class App extends Component{
           <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
         </div>
         :(
-          this.state.route ==='signin' ? <SignIn onRouteChange={this.onRouteChange}/> : <Register onRouteChange={this.onRouteChange}/>
+          this.state.route ==='signin' ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange}/> : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
         )}
       <ParticlesBg color="#ff9e3ad7f" num={10} type="circle" bg={true} />
     </div>
