@@ -73,7 +73,7 @@ class App extends Component{
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch('http://localhost:3000/imageurl', {
+    fetch('https://sheltered-shore-11150-402f68b72a3d.herokuapp.com/imageurl', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -83,7 +83,7 @@ class App extends Component{
         .then(response => response.json())
     .then(output => {
       if (output) {
-        fetch('http://localhost:3000/image', {
+        fetch('https://sheltered-shore-11150-402f68b72a3d.herokuapp.com/image', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
