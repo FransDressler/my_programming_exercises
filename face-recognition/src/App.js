@@ -140,9 +140,17 @@ class App extends Component{
           <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
         </div>
         :(
-          this.state.route ==='signin' ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange}/> : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+          this.state.route ==='signin' ? 
+            <div>
+              <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange}/> 
+              <ParticlesBg color="#ff9e3ad7f" num={10} type="circle" bg={true} />
+            </div>
+            : 
+            <div>
+              <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+              <ParticlesBg color="#ff9e3ad7f" num={10} type="circle" bg={true} />
+            </div>
         )}
-      <ParticlesBg color="#ff9e3ad7f" num={10} type="circle" bg={true} />
     </div>
   );
   }
